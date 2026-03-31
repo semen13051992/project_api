@@ -5,6 +5,10 @@ from endpoints.endpoint import Endpoint
 
 class CreateMeme(Endpoint):
     meme_id = None
+    body = {"info": {"colors": "brown"},
+     "tags": ["cat"],
+     "text": "TestUser",
+     "url": "https://images.meme-arsenal.com/eca8012efce4a5544e7db14553ea15bc.jpg"}
 
 
     def create_new_meme(self, body):
