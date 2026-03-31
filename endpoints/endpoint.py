@@ -4,8 +4,8 @@ class Endpoint:
     url = 'http://memesapi.course.qa-practice.com'
     response = None
     json = None
-    headers = {'Authorization': "9nTDxHHpzh5CStY"}
-    token = "9nTDxHHpzh5CStY"
+    headers = {'Authorization': "aRV2Ox3IuddmTHi"}
+    token = "aRV2Ox3IuddmTHi"
 
 
     def check_that_status_is_200(self):
@@ -14,10 +14,6 @@ class Endpoint:
 
     def check_that_status_is_404(self):
         assert self.response.status_code == 404
-
-
-    def check_that_status_is_401(self):
-        assert self.response.status_code == 401
 
 
     def check_that_status_is_400(self):
