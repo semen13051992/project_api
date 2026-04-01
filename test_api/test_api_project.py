@@ -1,17 +1,6 @@
 import pytest
 
-from conftest import data_t
-from conftest import data_negativ
-from conftest import info
-from conftest import info_negativ
-from conftest import tags
-from conftest import tags_negativ
-from conftest import text
-from conftest import text_negativ
-from conftest import url
-from conftest import url_negativ
-from conftest import meme_id
-from conftest import meme_id_negativ
+from conftest import *
 
 data = {"info": {"colors": "brown"},
         "tags": ["cat"],
@@ -118,7 +107,7 @@ def test_create_meme_data_url_negative(create_meme_endpoint, url):
 
 
 @pytest.mark.parametrize('data', data_t())
-def test_update_meme_(update_meme_endpoint, new_meme, data):
+def test_update_meme_data(update_meme_endpoint, new_meme, data):
     body = {
         "id": new_meme,
         "info": data['info'],
@@ -127,6 +116,7 @@ def test_update_meme_(update_meme_endpoint, new_meme, data):
         "url": data['url']}
     update_meme_endpoint.update_put_meme(new_meme, body)
     update_meme_endpoint.check_that_status_is_200()
+
 
 @pytest.mark.parametrize('info', info())
 def test_update_meme_info_correct(update_meme_endpoint, new_meme, info):
