@@ -4,8 +4,8 @@ class Endpoint:
     url = 'http://memesapi.course.qa-practice.com'
     response = None
     json = None
-    headers = {'Authorization': "aRV2Ox3IuddmTHi"}
-    token = "aRV2Ox3IuddmTHi"
+    headers = {'Authorization': "bHEAnoXK2Ma1IVo"}
+    token = "bHEAnoXK2Ma1IVo"
 
 
     def check_that_status_is_200(self):
