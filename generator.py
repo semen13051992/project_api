@@ -1,6 +1,6 @@
 import pytest
 
-#Решил поэксперементировать и сделал генеротор, но не понял как его ограничить
+#Решил поэксперементировать и сделать генеротор, но не понял как его ограничить
 
 infos = ({"colors": "brown"},{"colors": ["green", "black", "white"]}, {"objects": ["picture", "text"]},
              {'mem': "Dangerous Henry"},{'brand': ['toyota', 'bmw']})
