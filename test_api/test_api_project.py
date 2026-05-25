@@ -2,11 +2,6 @@ import pytest
 
 from conftest import *
 
-data = {"info": {"colors": "brown"},
-        "tags": ["cat"],
-        "text": "TestUser",
-        "url": "https://images.meme-arsenal.com/eca8012efce4a5544e7db14553ea15bc.jpg"}
-
 def test_token_verification(token_verification_endpoint):
     token_verification_endpoint.token_verification()
     token_verification_endpoint.check_that_status_is_200()
@@ -47,7 +42,7 @@ def test_create_meme_negativ(create_meme_endpoint, data):
 
 
 @pytest.mark.parametrize('info', info())
-def test_create_meme_data_info_correct(create_meme_endpoint, info):
+def test_create_meme_data_info_correct(create_meme_endpoint, info, data):
     data['info'] = info
     create_meme_endpoint.create_new_meme(data)
     create_meme_endpoint.check_that_status_is_200()
@@ -55,14 +50,14 @@ def test_create_meme_data_info_correct(create_meme_endpoint, info):
 
 
 @pytest.mark.parametrize('info', info_negativ())
-def test_create_meme_data_info_negativ(create_meme_endpoint, info):
+def test_create_meme_data_info_negativ(create_meme_endpoint, info, data):
     data['info'] = info
     create_meme_endpoint.create_new_meme(data)
     create_meme_endpoint.check_that_status_is_400()
 
 
 @pytest.mark.parametrize('tags', tags())
-def test_create_meme_data_tags_correct(create_meme_endpoint, tags):
+def test_create_meme_data_tags_correct(create_meme_endpoint, tags, data):
     data['tags'] = tags
     create_meme_endpoint.create_new_meme(data)
     create_meme_endpoint.check_that_status_is_200()
@@ -70,14 +65,14 @@ def test_create_meme_data_tags_correct(create_meme_endpoint, tags):
 
 
 @pytest.mark.parametrize('tags', tags_negativ())
-def test_create_meme_data_tags_negativ(create_meme_endpoint, tags):
+def test_create_meme_data_tags_negativ(create_meme_endpoint, tags, data):
     data['tags'] = tags
     create_meme_endpoint.create_new_meme(data)
     create_meme_endpoint.check_that_status_is_400()
 
 
 @pytest.mark.parametrize('text', text())
-def test_create_meme_data_text_correct(create_meme_endpoint, text):
+def test_create_meme_data_text_correct(create_meme_endpoint, text, data):
     data['text'] = text
     create_meme_endpoint.create_new_meme(data)
     create_meme_endpoint.check_that_status_is_200()
@@ -85,14 +80,14 @@ def test_create_meme_data_text_correct(create_meme_endpoint, text):
 
 
 @pytest.mark.parametrize('text', text_negativ())
-def test_create_meme_data_text_negativ(create_meme_endpoint, text):
+def test_create_meme_data_text_negativ(create_meme_endpoint, text, data):
     data['text'] = text
     create_meme_endpoint.create_new_meme(data)
     create_meme_endpoint.check_that_status_is_400()
 
 
 @pytest.mark.parametrize('url', url())
-def test_create_meme_data_url_correct(create_meme_endpoint, url):
+def test_create_meme_data_url_correct(create_meme_endpoint, url, data):
     data['url'] = url
     create_meme_endpoint.create_new_meme(data)
     create_meme_endpoint.check_that_status_is_200()
@@ -100,7 +95,7 @@ def test_create_meme_data_url_correct(create_meme_endpoint, url):
 
 
 @pytest.mark.parametrize('url', url_negativ())
-def test_create_meme_data_url_negative(create_meme_endpoint, url):
+def test_create_meme_data_url_negative(create_meme_endpoint, url, data):
     data['url'] = url
     create_meme_endpoint.create_new_meme(data)
     create_meme_endpoint.check_that_status_is_400()
@@ -119,7 +114,7 @@ def test_update_meme_data(update_meme_endpoint, new_meme, data):
 
 
 @pytest.mark.parametrize('info', info())
-def test_update_meme_info_correct(update_meme_endpoint, new_meme, info):
+def test_update_meme_info_correct(update_meme_endpoint, new_meme, info, data):
     data['info'] = info
     body = {
         "id": new_meme,
@@ -132,7 +127,7 @@ def test_update_meme_info_correct(update_meme_endpoint, new_meme, info):
 
 
 @pytest.mark.parametrize('info', info_negativ())
-def test_update_meme_info_negativ(update_meme_endpoint, new_meme, info):
+def test_update_meme_info_negativ(update_meme_endpoint, new_meme, info, data):
     data['info'] = info
     body = {
         "id": new_meme,
@@ -145,7 +140,7 @@ def test_update_meme_info_negativ(update_meme_endpoint, new_meme, info):
 
 
 @pytest.mark.parametrize('tags', tags())
-def test_update_meme_tags_correct(update_meme_endpoint, new_meme, tags):
+def test_update_meme_tags_correct(update_meme_endpoint, new_meme, tags, data):
     data['tags'] = tags
     body = {
         "id": new_meme,
@@ -158,7 +153,7 @@ def test_update_meme_tags_correct(update_meme_endpoint, new_meme, tags):
 
 
 @pytest.mark.parametrize('tags', tags_negativ())
-def test_update_meme_tags_negativ(update_meme_endpoint, new_meme, tags):
+def test_update_meme_tags_negativ(update_meme_endpoint, new_meme, tags, data):
     data['tags'] = tags
     body = {
         "id": new_meme,
@@ -171,7 +166,7 @@ def test_update_meme_tags_negativ(update_meme_endpoint, new_meme, tags):
 
 
 @pytest.mark.parametrize('text', text())
-def test_update_meme_text_correct(update_meme_endpoint, new_meme, text):
+def test_update_meme_text_correct(update_meme_endpoint, new_meme, text, data):
     data['text'] = text
     body = {
         "id": new_meme,
@@ -184,7 +179,7 @@ def test_update_meme_text_correct(update_meme_endpoint, new_meme, text):
 
 
 @pytest.mark.parametrize('text', text_negativ())
-def test_update_meme_url_negativ(update_meme_endpoint, new_meme, text):
+def test_update_meme_url_negativ(update_meme_endpoint, new_meme, text, data):
     data['text'] = text
     body = {
         "id": new_meme,
@@ -197,7 +192,7 @@ def test_update_meme_url_negativ(update_meme_endpoint, new_meme, text):
 
 
 @pytest.mark.parametrize('url', url())
-def test_update_meme_url_correct(update_meme_endpoint, new_meme, url):
+def test_update_meme_url_correct(update_meme_endpoint, new_meme, url, data):
     data['url'] = url
     body = {
         "id": new_meme,
@@ -210,7 +205,7 @@ def test_update_meme_url_correct(update_meme_endpoint, new_meme, url):
 
 
 @pytest.mark.parametrize('text', url_negativ())
-def test_update_meme_url_negativ(update_meme_endpoint, new_meme, text):
+def test_update_meme_url_negativ(update_meme_endpoint, new_meme, text, data):
     data['text'] = text
     body = {
         "id": new_meme,
