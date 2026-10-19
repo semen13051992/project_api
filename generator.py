@@ -1,5 +1,5 @@
 import pytest
-
+import requests
 #Решил поэксперементировать и сделать генеротор, но не понял как его ограничить
 
 infos = ({"colors": "brown"},{"colors": ["green", "black", "white"]}, {"objects": ["picture", "text"]},
@@ -33,16 +33,39 @@ def dates():
                         yield data
 
 
+@pytest.fixture(scope='session')
+def authorization_token():
+    url = 'http://memesapi.course.qa-practice.com'
+    #url = endpoint_url()
+    body = {"name": "qwerty"}
+    response = requests.post(f'{url}/authorize',
+    json=body)
+    json = response.json()
+    token = json['token']
+    #name = json['name']
+    return token
+
+
+@pytest.fixture()
+def headers(authorization_token):
+    headers = {'Authorization': f'{authorization_token}'}
+    return headers
+
+
 @pytest.mark.parametrize('data', dates())
-def test_update_meme_(update_meme_endpoint, new_meme, data):
-    body = {
+def test_update_meme_(update_meme_endpoint, new_meme, data, headers):
+    data = {
         "id": new_meme,
         "info": data['info'],
         "tags": data['tags'],
         "text": data['text'],
         "url": data['url']}
-    update_meme_endpoint.update_put_meme(new_meme, body)
+    update_meme_endpoint.update_put_meme(new_meme, data, headers)
     update_meme_endpoint.check_that_status_is_200()
+    update_meme_endpoint.сheck_non_empty_response()
+    update_meme_endpoint.сheck_contents_response()
+    update_meme_endpoint.сheck_generated_data(data)
+
 
 
 

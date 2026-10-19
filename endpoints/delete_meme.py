@@ -7,8 +7,8 @@ class DeleteMeme(Endpoint):
     meme_id = None
 
 
-    def delete_meme(self, meme_id):
+    def delete_meme(self, meme_id, headers):
         self.meme_id = meme_id
         self.response = requests.delete(f'{self.url}/meme/{meme_id}',
-        headers=self.headers)
+        headers=headers)
         return self.response
