@@ -1,7 +1,7 @@
 import requests
 
 from endpoints.endpoint import Endpoint
-
+from endpoints.authorize import Authorization
 
 class CreateMeme(Endpoint):
     meme_id = None
@@ -11,11 +11,11 @@ class CreateMeme(Endpoint):
      "url": "https://images.meme-arsenal.com/eca8012efce4a5544e7db14553ea15bc.jpg"}
 
 
-    def create_new_meme(self, body):
+    def create_new_meme(self, body, headers):
         self.response = requests.post(
             f'{self.url}/meme',
             json=body,
-            headers=self.headers
+            headers=headers
         )
         self.json = self.response.json()
         self.meme_id = self.json['id']

@@ -6,11 +6,11 @@ from endpoints.endpoint import Endpoint
 class UpdateMeme(Endpoint):
 
 
-    def update_put_meme(self, new_meme, data):
+    def update_put_meme(self, new_meme, data, headers):
         self.response = requests.put(
             f'{self.url}/meme/{new_meme}',
             json = data,
-            headers = self.headers
+            headers = headers
         )
         self.json = self.response.json()
         return self.response
