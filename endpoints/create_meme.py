@@ -1,7 +1,7 @@
 import requests
 
 from endpoints.endpoint import Endpoint
-from endpoints.authorize import Authorization
+
 
 class CreateMeme(Endpoint):
     meme_id = None
