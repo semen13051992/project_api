@@ -64,12 +64,11 @@ class Endpoint:
         assert text is not None
         assert url is not None
         assert type(json) is dict
-        #assert type(meme_id) is int
+        assert type(meme_id) is int
         assert type(info) is dict
         assert type(tags) is list
         assert type(text) is str
         assert type(url) is str
-        print(type(meme_id))
 
 
     def сheck_generated_data(self, body):
