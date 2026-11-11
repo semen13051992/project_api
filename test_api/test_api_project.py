@@ -1,7 +1,5 @@
 import pytest
-from data import meme_id_negative
-from data import data
-
+import data
 
 def test_token_verification(token_verification_endpoint, authorization_token):
     token_verification_endpoint.token_verification(authorization_token)
@@ -21,13 +19,13 @@ def test_get_one_meme(get_meme_endpoint, new_meme, headers):
     get_meme_endpoint.сheck_contents_response()
 
 
-@pytest.mark.parametrize('id', meme_id_negative)
+@pytest.mark.parametrize('id', data.meme_id_negative)
 def test_get_one_meme_negative_id(get_meme_endpoint, id, headers):
     get_meme_endpoint.get_one_meme(id, headers)
     get_meme_endpoint.check_that_status_is_404()
 
 
-@pytest.mark.parametrize('data', data)
+@pytest.mark.parametrize('data', data.data)
 def test_create_meme_positive(create_meme_endpoint, get_meme_endpoint, data, headers):
     create_meme_endpoint.create_new_meme(data, headers)
     create_meme_endpoint.check_that_status_is_200()
@@ -41,7 +39,7 @@ def test_create_meme_positive(create_meme_endpoint, get_meme_endpoint, data, hea
     get_meme_endpoint.сheck_generated_data(data)
 
 
-@pytest.mark.parametrize('data', data)
+@pytest.mark.parametrize('data', data.data)
 def test_update_meme_data(update_meme_endpoint, new_meme, get_meme_endpoint, data, headers):
     data = {
         "id": new_meme,
@@ -68,7 +66,7 @@ def test_delete_meme(delete_meme_endpoint, get_meme_endpoint, new_meme, headers)
     get_meme_endpoint.check_that_status_is_404()
 
 
-@pytest.mark.parametrize('id', meme_id_negative)
+@pytest.mark.parametrize('id', data.meme_id_negative)
 def test_delete_id_negativ(delete_meme_endpoint, id, headers):
     delete_meme_endpoint.delete_meme(id, headers)
     delete_meme_endpoint.check_that_status_is_404()
