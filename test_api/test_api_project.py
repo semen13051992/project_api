@@ -59,6 +59,18 @@ def test_update_meme_data(update_meme_endpoint, new_meme, get_meme_endpoint, dat
     get_meme_endpoint.сheck_generated_data(data)
 
 
+@pytest.mark.parametrize('id_negative', data.meme_id_negative)
+def test_update_meme_id_negativ(update_meme_endpoint, id_negative, new_meme, data, headers):
+    data = {
+        "id": new_meme,
+        "info": data['info'],
+        "tags": data['tags'],
+        "text": data['text'],
+        "url": data['url']}
+    update_meme_endpoint.update_put_meme(id_negative, data, headers)
+    update_meme_endpoint.check_that_status_is_404()
+
+
 def test_delete_meme(delete_meme_endpoint, get_meme_endpoint, new_meme, headers):
     delete_meme_endpoint.delete_meme(new_meme, headers)
     delete_meme_endpoint.check_that_status_is_200()
